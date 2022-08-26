@@ -1,4 +1,11 @@
-import { createApp } from 'vue'
-import App from './App.vue'
+import { createApp } from "./runtime-canvas";
+import { getRootContainer } from "./game";
+import App from "./App.vue";
 
-createApp(App).mount('#app')
+// vue template -> render -> vnode -> mountElement -> appendRootContainer
+
+// pixijs
+
+// canvas renderer
+
+createApp(App).mount(getRootContainer());

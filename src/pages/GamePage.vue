@@ -1,11 +1,11 @@
 <template>
   <container>
-    <sprite :texture="mapImg"></sprite>
+    <Map></Map>
   </container>
 </template>
 
 <script setup>
-import mapImg from "@/assets/map.jpg";
+import Map from "@/components/Map.vue";
 </script>
 
 <style lang="scss" scoped></style>

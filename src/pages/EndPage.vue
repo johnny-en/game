@@ -5,14 +5,14 @@
       x="228"
       y="512"
       :texture="restartBtn"
-      @click="startGame"
       :interactive="true"
+      @click="startGame"
     ></sprite>
   </container>
 </template>
 
 <script setup>
-import { defineEmits } from "vue";
+// 结束游戏
 import endPage from "@/assets/endPage.jpg";
 import restartBtn from "@/assets/restartBtn.png";
 

@@ -1,4 +1,3 @@
-<!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <container>
     <sprite :texture="mapImg" :y="map_y1"></sprite>
@@ -13,8 +12,7 @@ function useMove() {
   const map_y1 = ref(0);
   const map_y2 = ref(-game_height);
 
-  // 地图滚动
-  const speed = 10;
+  const speed = 2;
   const handleTicker = () => {
     map_y1.value += speed;
     map_y2.value += speed;
@@ -35,6 +33,7 @@ function useMove() {
 </script>
 
 <script setup>
+// 地图滚动
 import mapImg from "@/assets/map.jpg";
 const { map_y1, map_y2 } = useMove();
 </script>

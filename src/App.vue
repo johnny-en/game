@@ -18,6 +18,7 @@ import StartPage from "@/pages/StartPage.vue";
 import GamePage from "@/pages/GamePage.vue";
 import EndPage from "@/pages/EndPage.vue";
 
+// 切换界面
 const currentPage = ref("StartPage");
 const handleChangePage = (pageName) => {
   currentPage.value = pageName;

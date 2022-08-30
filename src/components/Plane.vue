@@ -5,39 +5,16 @@
 </template>
 <script>
 import { onMounted, onUnmounted, ref } from "vue";
+import { planeMove } from "./planeMove";
+
 export function usePlane({ onAttack }) {
   const planeInfo = ref({
-    x: 0,
-    y: 0,
+    x: 250,
+    y: 650,
+    width: 258,
+    height: 364,
   });
 
-  const move = () => {
-    const speed = 10;
-    const handleMove = (e) => {
-      switch (e.code) {
-        case "ArrowUp":
-          planeInfo.value.y -= speed;
-          break;
-        case "ArrowDown":
-          planeInfo.value.y += speed;
-          break;
-        case "ArrowLeft":
-          planeInfo.value.x -= speed;
-          break;
-        case "ArrowRight":
-          planeInfo.value.x += speed;
-          break;
-      }
-    };
-
-    onMounted(() => {
-      window.addEventListener("keyup", handleMove);
-    });
-
-    onUnmounted(() => {
-      window.removeEventListener("keyup", handleMove);
-    });
-  };
   const attack = () => {
     const handleAttack = (e) => {
       if (e.code === "Space") {
@@ -57,8 +34,8 @@ export function usePlane({ onAttack }) {
       window.removeEventListener("keyup", handleAttack);
     });
   };
-  move();
   attack();
+  planeMove(planeInfo.value);
 
   return {
     planeInfo,

@@ -4,15 +4,15 @@
   </container>
 </template>
 <script>
-// import { onMounted, onUnmounted, ref } from "vue";
-// import { game } from "@/game";
-import { ref } from "vue";
+import { onMounted, onUnmounted, ref } from "vue";
+import { game } from "@/game";
 import config from "@/config";
 import { random } from "@/utils";
 
 export function useEnemy() {
   const enemys = ref([]);
 
+  let timer;
   function createEnemys(delay) {
     const speed = config?.enemy?.speed;
     return setTimeout(() => {
@@ -24,28 +24,30 @@ export function useEnemy() {
         height: 207,
         HP: 2,
       });
-      createEnemys(random(2, 5) * 1000);
+      timer = createEnemys(random(2, 5) * 1000);
     }, delay);
   }
   createEnemys(random(2, 5) * 1000);
 
-  // function move() {
-  //   function handleTicker() {
-  //     enemys.value.forEach((enemy, index) => {
-  //       enemy.y += enemy.speed;
-  //       if (enemy.y > 1300) {
-  //         displayEnemy(index);
-  //       }
-  //     });
-  //   }
-  //   onMounted(() => {
-  //     game.ticker.add(handleTicker);
-  //   });
-  //   onUnmounted(() => {
-  //     game.ticker.remove(handleTicker);
-  //   });
-  // }
-  // move();
+  function move() {
+    function handleTicker() {
+      enemys.value.forEach((enemy, index) => {
+        enemy.y += enemy.speed;
+        if (enemy.y > 1300) {
+          displayEnemy(index);
+        }
+      });
+    }
+    onMounted(() => {
+      game.ticker.add(handleTicker);
+    });
+    onUnmounted(() => {
+      game.ticker.remove(handleTicker);
+      console.log(timer);
+      clearTimeout(timer);
+    });
+  }
+  move();
 
   function hitEnemy(enemy, enemyIndex) {
     enemy.HP--;

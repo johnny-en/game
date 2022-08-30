@@ -4,8 +4,9 @@
   </container>
 </template>
 <script>
-import { onMounted, onUnmounted, ref } from "vue";
-import { game } from "@/game";
+// import { onMounted, onUnmounted, ref } from "vue";
+// import { game } from "@/game";
+import { ref } from "vue";
 import config from "@/config";
 import { random } from "@/utils";
 
@@ -19,32 +20,47 @@ export function useEnemy() {
         x: random(0, 420),
         y: -100,
         speed: typeof speed === "function" ? speed() : speed,
+        width: 308,
+        height: 207,
+        HP: 2,
       });
       createEnemys(random(2, 5) * 1000);
     }, delay);
   }
   createEnemys(random(2, 5) * 1000);
 
-  function move() {
-    function handleTicker() {
-      enemys.value.forEach((enemy, index) => {
-        enemy.y += enemy.speed;
-        if (enemy.y > 1300) {
-          enemys.value.splice(index, 1);
-        }
-      });
+  // function move() {
+  //   function handleTicker() {
+  //     enemys.value.forEach((enemy, index) => {
+  //       enemy.y += enemy.speed;
+  //       if (enemy.y > 1300) {
+  //         displayEnemy(index);
+  //       }
+  //     });
+  //   }
+  //   onMounted(() => {
+  //     game.ticker.add(handleTicker);
+  //   });
+  //   onUnmounted(() => {
+  //     game.ticker.remove(handleTicker);
+  //   });
+  // }
+  // move();
+
+  function hitEnemy(enemy, enemyIndex) {
+    enemy.HP--;
+    if (enemy.HP <= 0) {
+      displayEnemy(enemyIndex);
     }
-    onMounted(() => {
-      game.ticker.add(handleTicker);
-    });
-    onUnmounted(() => {
-      game.ticker.remove(handleTicker);
-    });
   }
-  move();
+
+  function displayEnemy(index) {
+    enemys.value.splice(index, 1);
+  }
 
   return {
     enemys,
+    hitEnemy,
   };
 }
 </script>

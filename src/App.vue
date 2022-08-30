@@ -4,7 +4,10 @@
       v-if="currentPage === 'StartPage'"
       @change-page="handleChangePage"
     ></start-page>
-    <game-page v-else-if="currentPage === 'GamePage'"></game-page>
+    <game-page
+      v-else-if="currentPage === 'GamePage'"
+      @change-page="handleChangePage"
+    ></game-page>
     <end-page
       v-else-if="currentPage === 'EndPage'"
       @change-page="handleChangePage"

@@ -12,7 +12,11 @@ export function useBullet() {
   const bullets = ref([]);
 
   const addBullet = (position) => {
-    bullets.value.push({ ...position });
+    bullets.value.push({ width: 61, height: 99, ...position });
+  };
+
+  const distoryBullet = (index) => {
+    bullets.value.splice(index, 1);
   };
 
   const move = () => {
@@ -21,7 +25,7 @@ export function useBullet() {
       bullets.value.forEach((bullet, index) => {
         bullet.y -= speed;
         if (bullet.y <= -100) {
-          bullets.value.splice(index, 1);
+          distoryBullet(index);
         }
       });
     };
@@ -39,6 +43,7 @@ export function useBullet() {
   return {
     bullets,
     addBullet,
+    distoryBullet,
   };
 }
 </script>
